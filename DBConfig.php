@@ -4,7 +4,7 @@ require_once "DotEnvLoader.php";
 
 class DBConfig
 {
-    private $dbConnection;
+    private Mysqli $dbConnection;
 
     public function __construct()
     {
@@ -17,21 +17,8 @@ class DBConfig
         }
     }
 
-    public function queryDB(string $query): array
+    public function queryDB(string $query): bool|mysqli_result
     {
-        $results = $this->dbConnection->query($query);
-        return $this->parseData($results);
-    }
-
-    private function parseData(mysqli_result $data): array
-    {
-        $rowsNumber = $data->num_rows;
-        $parsedData = [];
-        for ($i = 0; $i < $rowsNumber; $i++) {
-            $data->data_seek($i);
-            $row = $data->fetch_array(MYSQLI_ASSOC);
-            $parsedData[] = $row;
-        }
-        return $parsedData;
+        return $this->dbConnection->query($query);
     }
 }
