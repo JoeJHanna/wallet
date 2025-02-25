@@ -17,7 +17,6 @@ class MySqlWrapper
 
     }
 
-
     public function parseLoginRequest(): bool
     {
         $query = "SELECT user_id FROM users WHERE email='$this->email' AND password='$this->password'";
