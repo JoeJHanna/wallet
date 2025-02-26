@@ -1,6 +1,7 @@
 <?php
 
 require_once('DBConfig.php');
+require_once('Cryptography.php');
 
 class MySqlWrapper
 {
@@ -9,24 +10,24 @@ class MySqlWrapper
 
     private DBConfig $connection;
 
-    public function __construct($request)
+    public function __construct($email, $password)
     {
-        $this->email = $request['email'];
-        $this->password = $request['password'];
+        $this->email = $email;
+        $this->password = $password;
         $this->connection = new DBConfig();
 
     }
 
     public function parseLoginRequest(): bool
     {
-        $query = "SELECT user_id FROM users WHERE email='$this->email' AND password='$this->password'";
+        $query = "SELECT password FROM users WHERE email='$this->email'";
 
         $result = $this->parseData($query);
+        if ($result == null) {
+            return false;
 
-        if (count($result) == 1) {
-            return true;
         }
-        return false;
+        return Cryptography::verifyHashedPassword($this->password, $result[0]["password"]);
     }
 
     private function parseData(string $query): array
