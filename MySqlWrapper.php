@@ -2,6 +2,7 @@
 
 require_once('DBConfig.php');
 require_once('Cryptography.php');
+require_once('MysqlDuplicateEntryException.php');
 
 class MySqlWrapper
 {
@@ -30,6 +31,23 @@ class MySqlWrapper
         return Cryptography::verifyHashedPassword($this->password, $result[0]["password"]);
     }
 
+
+    public function parseRegistration(): array
+    {
+        $data = [
+            "success" => false,
+            "message" => DEFAULT_ERROR_MESSAGE
+        ];
+
+        try {
+            $this->connection->queryDB("INSERT INTO users (email, password) VALUES ('$this->email', '$this->password');");
+            $data["success"] = true;
+            $data["message"] = DEFAULT_SUCCESS_MESSAGE;
+        } catch (MysqlDuplicateEntryException $exception) {
+            $data["message"] = USER_ALREADY_EXISTS;
+        }
+        return $data;
+    }
     private function parseData(string $query): array
     {
         $data = $this->connection->queryDB($query);

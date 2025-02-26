@@ -1,16 +1,15 @@
 <?php
-/*
- * References: https://stackoverflow.com/a/34372036
- * https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
- */
 
 require_once("MySqlWrapper.php");
 require_once("Constants.php");
 require_once("Response.php");
+require_once("Cryptography.php");
 require_once("ValidateString.php");
+require_once('MysqlDuplicateEntryException.php');
 
-class LoginApi
+class RegisterApi
 {
+
     private string $email;
     private string $password;
 
@@ -32,41 +31,36 @@ class LoginApi
 
         if (!$this->areParamsValid()) {
             return new Response(
-                STATUS_BAD_REQUEST,
+                STATUS_UNAUTHORIZED,
                 DEFAULT_ERROR_MESSAGE,
                 null
             );
         }
-        return $this->verifyLogin();
+
+        $this->password = Cryptography::hashPassword($this->password);
+        return $this->register();
     }
 
-    private function verifyLogin(): Response
+    private function register(): Response
     {
         $wrapper = new MySqlWrapper($this->email, $this->password);
-        if ($wrapper->parseLoginRequest()) {
-            return new Response(
-                STATUS_SUCCESS,
-                DEFAULT_SUCCESS_MESSAGE,
-                ["token"]
-            );
+        $data = $wrapper->parseRegistration();
+        $status_code = STATUS_UNAUTHORIZED;
+        if ($data["success"]) {
+            $status_code = STATUS_SUCCESS;
         }
         return new Response(
-            STATUS_UNAUTHORIZED,
-            USER_NOT_FOUND_MESSAGE,
+            $status_code,
+            $data["message"],
             null
         );
-
-
     }
 
     private function areParamsValid(): bool
     {
-        if ((!ValidateString::isValidEmailInput($this->email)) || (!ValidateString::isValidPasswordInput($this->password))) {
-            return false;
-        }
-        return true;
+        return !((!ValidateString::isValidEmailInput($this->email)) || (!ValidateString::isValidPasswordInput($this->password)));
     }
 }
 
-$api = new LoginApi();
+$api = new RegisterApi();
 echo $api->handleRequest();

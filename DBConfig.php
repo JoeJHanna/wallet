@@ -2,6 +2,9 @@
 
 require_once "DotEnvLoader.php";
 
+/**
+ * https://stackoverflow.com/a/3146986
+ */
 class DBConfig
 {
     private Mysqli $dbConnection;
@@ -17,8 +20,21 @@ class DBConfig
         }
     }
 
+    /**
+     * @throws MysqlDuplicateEntryException
+     */
     public function queryDB(string $query): bool|mysqli_result
     {
-        return $this->dbConnection->query($query);
+        try {
+            return $this->dbConnection->query($query);
+        } catch (mysqli_sql_exception $exception) {
+            $error_number = mysqli_errno($this->dbConnection);
+            switch ($error_number) {
+                case MYSQL_ERROR_DUPLICATE_ENTRY:
+                    throw new MysqlDuplicateEntryException();
+                default:
+                    throw $exception;
+            }
+        }
     }
 }

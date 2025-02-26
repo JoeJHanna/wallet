@@ -14,3 +14,7 @@ const STATUS_METHOD_NOT_ALLOWED = 405;
 
 const USER_NOT_FOUND_MESSAGE = "User or Password incorrect!";
 
+const USER_ALREADY_EXISTS = "User already exists!";
+
+const MYSQL_ERROR_DUPLICATE_ENTRY = 1062;
+
