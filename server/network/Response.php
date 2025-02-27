@@ -1,12 +1,17 @@
 <?php
 
-require_once("Constants.php");
+namespace network;
+
+require_once(__DIR__ . '/../util/Constants.php');
+
+use JsonException;
+use const util\HEADERS;
 
 class Response
 {
-    private $statusCode;
-    private $message;
-    private $data;
+    private int $statusCode;
+    private string $message;
+    private ?array $data;
 
     public function __construct(int $statusCode, string $message, array|null $data)
     {
@@ -15,23 +20,20 @@ class Response
         $this->data = $data;
     }
 
-    private function getBodyAsJson()
+    /**
+     * @throws JsonException
+     */
+    private function getBodyAsJson(): bool|string
     {
         return json_encode([
             "message" => $this->message,
             "data" => $this->data
-        ]);
-    }
-
-    private function get()
-    {
-        header(HEADERS, true, $this->statusCode);
-        return $this->getBodyAsJson();
+        ], JSON_THROW_ON_ERROR);
     }
 
     public function __toString(): string
     {
-        return $this->get();
+        header(HEADERS, true, $this->statusCode);
+        return $this->getBodyAsJson();
     }
-
 }

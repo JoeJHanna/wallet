@@ -1,9 +1,20 @@
 <?php
 
-require_once "DotEnvLoader.php";
+namespace connection;
+
+require_once(__DIR__ . '/../exception/MysqlDuplicateEntryException.php');
+require_once(__DIR__ . '/../util/Constants.php');
+require_once(__DIR__ . '/../util/DotEnvLoader.php');
+
+use exception\MysqlDuplicateEntryException;
+use mysqli;
+use mysqli_result;
+use mysqli_sql_exception;
+use util\DotEnvLoader;
+use const util\MYSQL_ERROR_DUPLICATE_ENTRY;
 
 /**
- * https://stackoverflow.com/a/3146986
+ * Referene: https://stackoverflow.com/a/3146986
  */
 class DBConfig
 {

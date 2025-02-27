@@ -1,8 +1,18 @@
 <?php
 
-require_once('DBConfig.php');
-require_once('Cryptography.php');
-require_once('MysqlDuplicateEntryException.php');
+namespace connection;
+
+require_once(__DIR__ . '/../exception/MysqlDuplicateEntryException.php');
+require_once(__DIR__ . '/../util/Constants.php');
+require_once(__DIR__ . '/../util/Cryptography.php');
+
+use exception\MysqlDuplicateEntryException;
+use util\Cryptography;
+use const util\DEFAULT_ERROR_MESSAGE;
+use const util\DEFAULT_SUCCESS_MESSAGE;
+use const util\USER_ALREADY_EXISTS;
+
+require_once ("DBConfig.php");
 
 class MySqlWrapper
 {
@@ -43,11 +53,12 @@ class MySqlWrapper
             $this->connection->queryDB("INSERT INTO users (email, password) VALUES ('$this->email', '$this->password');");
             $data["success"] = true;
             $data["message"] = DEFAULT_SUCCESS_MESSAGE;
-        } catch (MysqlDuplicateEntryException $exception) {
+        } catch (MysqlDuplicateEntryException) {
             $data["message"] = USER_ALREADY_EXISTS;
         }
         return $data;
     }
+
     private function parseData(string $query): array
     {
         $data = $this->connection->queryDB($query);

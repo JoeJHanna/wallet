@@ -1,10 +1,11 @@
 <?php
 
-/*
-* References: https://www.php.net/manual/en/function.password-hash.php
-* https://stackoverflow.com/a/17073604
-*/
+/**
+ * References: https://www.php.net/manual/en/function.password-hash.php
+ * https://stackoverflow.com/a/17073604
+ */
 
+namespace util;
 class Cryptography
 {
 
@@ -17,5 +18,4 @@ class Cryptography
     {
         return password_verify($password, $hash);
     }
-
 }

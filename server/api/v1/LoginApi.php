@@ -1,14 +1,28 @@
 <?php
-/*
+
+namespace api\v1;
+
+require_once(__DIR__ . '/../../connection/MySqlWrapper.php');
+require_once(__DIR__ . '/../../network/Response.php');
+require_once(__DIR__ . '/../../util/Constants.php');
+require_once(__DIR__ . '/../../util/ValidateString.php');
+
+use connection\MySqlWrapper;
+use network\Response;
+use util\ValidateString;
+use const util\DEFAULT_ERROR_MESSAGE;
+use const util\DEFAULT_SUCCESS_MESSAGE;
+use const util\STATUS_BAD_REQUEST;
+use const util\STATUS_METHOD_NOT_ALLOWED;
+use const util\STATUS_SUCCESS;
+use const util\STATUS_UNAUTHORIZED;
+use const util\USER_NOT_FOUND_MESSAGE;
+
+
+/**
  * References: https://stackoverflow.com/a/34372036
  * https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
  */
-
-require_once("MySqlWrapper.php");
-require_once("Constants.php");
-require_once("Response.php");
-require_once("ValidateString.php");
-
 class LoginApi
 {
     private string $email;
@@ -61,10 +75,7 @@ class LoginApi
 
     private function areParamsValid(): bool
     {
-        if ((!ValidateString::isValidEmailInput($this->email)) || (!ValidateString::isValidPasswordInput($this->password))) {
-            return false;
-        }
-        return true;
+        return !((!ValidateString::isValidEmailInput($this->email)) || (!ValidateString::isValidPasswordInput($this->password)));
     }
 }
 
