@@ -20,11 +20,21 @@ class DBConfig
 {
     private Mysqli $dbConnection;
 
-    public function __construct()
+    public function __construct(bool $isMigration = false)
     {
         $env = new DotEnvLoader();
+        if ($isMigration) {
+            $database = null;
+        } else {
+            $database = $env->get("DB_NAME");
+        }
 
-        $this->dbConnection = new Mysqli("localhost", $env->get("DB_USER"), $env->get("DB_PASSWORD"), $env->get("DB_TABLE"));
+        $this->dbConnection = new Mysqli(
+            hostname: "localhost",
+            username: $env->get("DB_USER"),
+            password: $env->get("DB_PASSWORD"),
+            database: $database
+        );
 
         if ($this->dbConnection->error) {
             echo "Error connecting to Database";

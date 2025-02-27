@@ -56,8 +56,8 @@ class LoginApi
 
     private function verifyLogin(): Response
     {
-        $wrapper = new MySqlWrapper($this->email, $this->password);
-        if ($wrapper->parseLoginRequest()) {
+        $wrapper = new MySqlWrapper();
+        if ($wrapper->parseLoginRequest($this->email, $this->password)) {
             return new Response(
                 STATUS_SUCCESS,
                 DEFAULT_SUCCESS_MESSAGE,

@@ -16,29 +16,24 @@ require_once ("DBConfig.php");
 
 class MySqlWrapper
 {
-    private string $email;
-    private string $password;
-
     private DBConfig $connection;
 
-    public function __construct($email, $password)
+    public function __construct()
     {
-        $this->email = $email;
-        $this->password = $password;
         $this->connection = new DBConfig();
 
     }
 
-    public function parseLoginRequest(): bool
+    public function parseLoginRequest($email, $password): bool
     {
-        $query = "SELECT password FROM users WHERE email='$this->email'";
+        $query = "SELECT password FROM users WHERE email='$email'";
 
         $result = $this->parseData($query);
         if ($result == null) {
             return false;
 
         }
-        return Cryptography::verifyHashedPassword($this->password, $result[0]["password"]);
+        return Cryptography::verifyHashedPassword($password, $result[0]["password"]);
     }
 
 
