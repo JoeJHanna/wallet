@@ -19,14 +19,23 @@ use const util\STATUS_UNAUTHORIZED;
 class RegisterApi
 {
 
-    private string $email;
-    private string $password;
+    private string|null $email;
+    private string| null $password;
 
     public function __construct()
     {
         $requestBody = json_decode(file_get_contents('php://input'), true);
-        $this->email = $requestBody['email'];
-        $this->password = $requestBody['password'];
+        $this->setVariable(requestBody: $requestBody, key: "email");
+        $this->setVariable(requestBody: $requestBody, key: "password");
+    }
+
+    private function setVariable($requestBody, $key)
+    {
+        if (isset($requestBody[$key])) {
+            $this->$key = $requestBody['email'];
+        } else {
+            $this->$key = null;
+        }
     }
 
     public function handleRequest(): Response
