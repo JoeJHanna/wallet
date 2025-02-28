@@ -23,7 +23,7 @@ abstract class API
                 STATUS_METHOD_NOT_ALLOWED,
                 DEFAULT_ERROR_MESSAGE,
                 null);
-        };
+        }
 
         if (!$this->areParamsValid()) {
             return new Response(

@@ -5,18 +5,18 @@ require_once(__DIR__ . '/../../network/Response.php');
 require_once(__DIR__ . '/../../util/Constants.php');
 require_once(__DIR__ . '/../../util/Cryptography.php');
 require_once(__DIR__ . '/../../util/ValidateString.php');
+require_once(__DIR__ . '/../API.php');
 
+use api\API;
 use connection\MySqlWrapper;
 use network\Response;
 use util\Cryptography;
 use util\ValidateString;
-use const util\DEFAULT_ERROR_MESSAGE;
-use const util\STATUS_METHOD_NOT_ALLOWED;
 use const util\STATUS_SUCCESS;
 use const util\STATUS_UNAUTHORIZED;
 
 
-class RegisterApi
+class Register extends API
 {
 
     private string|null $email;
@@ -40,28 +40,17 @@ class RegisterApi
 
     public function handleRequest(): Response
     {
-        if ($_SERVER['REQUEST_METHOD'] !== "POST") {
-            return new Response(
-                STATUS_METHOD_NOT_ALLOWED,
-                DEFAULT_ERROR_MESSAGE,
-                null);
+        $response = $this->handleRequestErrors($_SERVER);
+        if ($response) {
+            return $response;
         }
-
-        if (!$this->areParamsValid()) {
-            return new Response(
-                STATUS_UNAUTHORIZED,
-                DEFAULT_ERROR_MESSAGE,
-                null
-            );
-        }
-
         $this->password = Cryptography::hashPassword($this->password);
         return $this->register();
     }
 
     private function register(): Response
     {
-        $wrapper = new MySqlWrapper($this->email, $this->password);
+        $wrapper = new MySqlWrapper();
         $data = $wrapper->parseRegistration();
         $status_code = STATUS_UNAUTHORIZED;
         if ($data["success"]) {
@@ -74,11 +63,19 @@ class RegisterApi
         );
     }
 
-    private function areParamsValid(): bool
+    protected function areParamsValid(): bool
     {
-        return !((!ValidateString::isValidEmailInput($this->email)) || (!ValidateString::isValidPasswordInput($this->password)));
+        var_dump(ValidateString::isValidEmailInput($this->password));
+        var_dump(ValidateString::isValidPasswordInput($this->password));
+        die();
+        return ValidateString::isValidEmailInput($this->email) && ValidateString::isValidPasswordInput($this->password);
+    }
+
+    protected function getAllowedMethods(): array
+    {
+        return ["POST"];
     }
 }
 
-$api = new RegisterApi();
+$api = new Register();
 echo $api->handleRequest();
