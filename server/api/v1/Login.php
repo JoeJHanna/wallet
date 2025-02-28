@@ -6,14 +6,13 @@ require_once(__DIR__ . '/../../connection/MySqlWrapper.php');
 require_once(__DIR__ . '/../../network/Response.php');
 require_once(__DIR__ . '/../../util/Constants.php');
 require_once(__DIR__ . '/../../util/ValidateString.php');
+require_once(__DIR__ . '/../API.php');
 
+use api\API;
 use connection\MySqlWrapper;
 use network\Response;
 use util\ValidateString;
-use const util\DEFAULT_ERROR_MESSAGE;
 use const util\DEFAULT_SUCCESS_MESSAGE;
-use const util\STATUS_BAD_REQUEST;
-use const util\STATUS_METHOD_NOT_ALLOWED;
 use const util\STATUS_SUCCESS;
 use const util\STATUS_UNAUTHORIZED;
 use const util\USER_NOT_FOUND_MESSAGE;
@@ -23,7 +22,7 @@ use const util\USER_NOT_FOUND_MESSAGE;
  * References: https://stackoverflow.com/a/34372036
  * https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
  */
-class LoginApi
+class Login extends API
 {
     private string $email;
     private string $password;
@@ -37,19 +36,9 @@ class LoginApi
 
     public function handleRequest(): Response
     {
-        if ($_SERVER['REQUEST_METHOD'] !== "POST") {
-            return new Response(
-                STATUS_METHOD_NOT_ALLOWED,
-                DEFAULT_ERROR_MESSAGE,
-                null);
-        }
-
-        if (!$this->areParamsValid()) {
-            return new Response(
-                STATUS_BAD_REQUEST,
-                DEFAULT_ERROR_MESSAGE,
-                null
-            );
+        $response = $this->handleRequestErrors($_SERVER);
+        if ($response) {
+            return $response;
         }
         return $this->verifyLogin();
     }
@@ -69,15 +58,18 @@ class LoginApi
             USER_NOT_FOUND_MESSAGE,
             null
         );
-
-
     }
 
-    private function areParamsValid(): bool
+    protected function areParamsValid(): bool
     {
         return !((!ValidateString::isValidEmailInput($this->email)) || (!ValidateString::isValidPasswordInput($this->password)));
     }
+
+    protected function getAllowedMethods(): array
+    {
+        return ["POST"];
+    }
 }
 
-$api = new LoginApi();
+$api = new Login();
 echo $api->handleRequest();
