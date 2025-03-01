@@ -1,0 +1,355 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+
+.login-form-container {
+    font-family: "Roboto", serif;
+    width: 100%;
+    height: 100vh;
+    color: #26282B;
+    background-color: #03346E;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: scroll;
+    flex-wrap: wrap;
+}
+
+.home-container {
+    font-family: "Roboto", serif;
+    width: 100%;
+    height: 100vh;
+    color: #26282B;
+    overflow: scroll;
+    background-color: #03346E;
+}
+
+
+.header {
+    background-color: black;
+    height: 100vh;
+}
+
+.nav-wrapper {
+    height: 100px;
+    background-color: beige;
+}
+
+.navigation {
+    width: 90%;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    font-size: 24px;
+    font-weight: bolder;
+}
+
+.brand-group {
+    display: flex;
+    align-items: center;
+}
+
+.logo-wrapper {
+    width: 75px;
+    height: 75px;
+}
+
+.logo {
+    width: inherit;
+    height: inherit;
+}
+
+.brand {
+    margin-left: 15px;
+}
+
+.nav-link-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.nav-get-in-button {
+    background-color: #26282B;
+    border-radius: 100px;
+}
+
+.nav-get-in-button > p {
+    margin: 0.8em 1em;
+    color: beige;
+}
+
+.main-header-section-wrapper {
+    padding-top: 400px;
+    width: 50%;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.main-header-section {
+    display: flex;
+    gap: 50px;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+}
+
+.main-header-section > button {
+    background-color: darkblue;
+    font-size: 24px;
+    width: 50%;
+}
+
+.headline {
+    font-size: 62px;
+    color: blue;
+}
+
+.services-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.services-wrapper {
+    width: 80%;
+    display: block;
+}
+
+.services-flex-box {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin: 200px 0;
+}
+
+.services-sub-flex-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.image-wrapper {
+    background-color: black;
+    border-radius: 200px;
+    min-width: 300px;
+    aspect-ratio: 1;
+    width: 80%;
+    margin: 40px;
+}
+
+.services-sub-flex-box > h2 {
+    padding-bottom: 20px;
+}
+
+.services-sub-flex-box.card > p {
+    width: 290px;
+    font-style: italic;
+    text-align: center;
+    padding-bottom: 50px;
+}
+
+
+.services-sub-flex-box-button {
+    height: 30px;
+    background-color: #26282B;
+}
+
+.feature-container {
+    background-color: black;
+    display: block;
+}
+
+.feature-slider-wrapper {
+    width: 80%;
+    padding: 200px 0;
+    margin: 0 auto;
+}
+
+.feature-slider {
+    display: flex;
+    overflow: scroll;
+    margin: 0 auto;
+}
+
+.feature-card {
+    display: flex;
+    flex-direction: column;
+    margin: 0 50px;
+    justify-content: flex-start;
+    align-items: center;
+    color: darkblue;
+    text-align: center;
+
+}
+
+.feature-image-wrapper {
+    width: 800px;
+    height: 700px;
+    background-color: darkblue;
+    border-radius: 30px;
+    margin-bottom: 30px;
+}
+
+
+.feature-card > h2 {
+    font-size: 34px;
+    font-weight: bolder;
+    margin-bottom: 30px;
+}
+
+.feature-card > p {
+    font-style: italic;
+    margin: 30px;
+}
+
+.login-button {
+    background-color: #26282B;
+    border-radius: 100px;
+    height: 60px;
+    min-height: 60px;
+}
+
+.login-button > p {
+    font-size: 34px;
+    color: beige;
+}
+
+.login-form-container {
+    display: flex;
+}
+
+.form {
+    display: flex;
+    justify-content: stretch;
+    width: 500px;
+}
+
+.form-body {
+    margin: 40px;
+    width: 95%;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-content: center;
+    overflow: scroll;
+    gap: 20px;
+}
+
+.text-area-group {
+    display: flex;
+    flex-direction: column;
+}
+.text-area {
+    border: 2px solid #26282B;
+    border-radius: 100px;
+    height: 50px;
+    background-color: beige;
+    font-size: 24px;
+}
+
+.form-body:nth-child(1) {
+    margin-bottom: 50px;
+}
+
+.text-area-label {
+    padding-bottom: 5px;
+    padding-left: 10px;
+
+}
+
+.section-title {
+    font-size: 48px;
+    align-self: center;
+    padding-bottom: 40px;
+}
+
+.link {
+    color: darkblue;
+    text-decoration: underline;
+}
+
+.form-divider {
+    height: 0.1em;
+    background-color: #26282B;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px 0;
+}
+
+.form-divider > p {
+    font-size: 1.5em;
+    color: #26282B;
+    background-color: beige;
+    padding: 0 10px;
+}
+
+.max-height {
+    max-height: 50px;
+}
+
+.card {
+    background-color: beige;
+    border-radius: 40px;
+    box-shadow: 0 5px 15px rgb(0 0 0 / 0.5);
+}
+
+.card > p {
+    color: #26282B;
+}
+
+.register-text {
+    text-align: center;
+}
+
+
+@media (max-width: 1000px) {
+    .form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 90vw;
+        height: 90vh;
+    }
+
+    .form-body {
+        font-size: 34px;
+        height: 90%;
+        gap: 30px;
+    }
+
+    .text-area {
+        height: 70px;
+        min-height: 70px;
+    }
+
+    .login-button {
+        height: 70px;
+        min-height: 70px;
+    }
+
+    .login-button > p {
+        font-size: 40px;
+    }
+
+    .form-divider {
+        margin: 2em 0;
+    }
+
+    .services-sub-flex-box {
+        height: 90vh;
+        width: 90vw;
+    }
+
+
+}
