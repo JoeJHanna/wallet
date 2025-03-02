@@ -2,43 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>Register</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<section class="login-form-container">
+<section class="login-container">
     <div class="card">
-            <form class="form">
-                <div class="form-body">
-                <h1 class="section-title">Register</h1>
-               <div class="text-area-group">
-                   <label for="login-form-email" class="text-area-label">Email or Phone Number</label>
-                <input type="text" name="login-form-email" id="login-form-email" class="text-area">
-               </div>
-                <div class="text-area-group">
-                <label for="login-form-password" class="text-area-label">Password</label>
-                    <input type="password" name="login-form-password" id="login-form-password" class="text-area">
-                </div>
-                    <button class="login-button" id="login-button">
-                    <p>Register!</p>
-                </button>
-                <div class="form-divider">
-                    <p>or</p>
-                </div>
-                <button class="login-button" id="gmail-login-button">
-                    <p>Gmail</p>
-                </button>
-                <button class="login-button" id="apple-login-button">
-                    <p>Apple</p>
-                </button>
-                <p class="register-text">Don't have and account <a class="link">Login here.</a>
-                </div>
-            </form>
-        </div>
+        <form class="login-form">
+            <h1>Register</h1>
+            <div class="input-group">
+                <label for="login-form-email" class="input-label">Email or Phone Number</label>
+                <input type="text" name="login-form-email" id="login-form-email" class="input">
+            </div>
+            <div class="input-group">
+                <label for="login-form-password" class="input-label">Password</label>
+                <input type="password" name="login-form-password" id="login-form-password" class="input">
+            </div>
+            <button id="login-button">Register!</button>
+            <div class="login-form-divider"></div>
+            <button id="gmail-login-button">
+                Gmail
+            </button>
+            <button id="apple-login-button">
+                Apple
+            </button>
+            <p class="register-text">Don't have and account <a>Login here.</a>
+        </form>
+    </div>
 </section>
 <script src="login.js"></script>
 </body>
