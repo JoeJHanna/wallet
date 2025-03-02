@@ -62,7 +62,7 @@ class Login extends API
 
     protected function areParamsValid(): bool
     {
-        return !((!ValidateString::isValidEmailInput($this->email)) || (!ValidateString::isValidPasswordInput($this->password)));
+        return (ValidateString::isValidEmailInput($this->email) || ValidateString::isValidPasswordInput($this->password));
     }
 
     protected function getAllowedMethods(): array

@@ -32,7 +32,7 @@ class Register extends API
     private function setVariable($requestBody, $key)
     {
         if (isset($requestBody[$key])) {
-            $this->$key = $requestBody['email'];
+            $this->$key = $requestBody[$key];
         } else {
             $this->$key = null;
         }
@@ -44,6 +44,7 @@ class Register extends API
         if ($response) {
             return $response;
         }
+        var_dump($this->password);
         $this->password = Cryptography::hashPassword($this->password);
         return $this->register();
     }
@@ -65,10 +66,7 @@ class Register extends API
 
     protected function areParamsValid(): bool
     {
-//        var_dump(ValidateString::isValidEmailInput($this->password));
-//        var_dump(ValidateString::isValidPasswordInput($this->password));
-//        die();
-        return true;
+        return ValidateString::isValidEmailInput($this->email) || ValidateString::isValidPasswordInput($this->password);
     }
 
     protected function getAllowedMethods(): array
