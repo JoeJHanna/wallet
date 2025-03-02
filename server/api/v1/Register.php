@@ -51,7 +51,7 @@ class Register extends API
     private function register(): Response
     {
         $wrapper = new MySqlWrapper();
-        $data = $wrapper->parseRegistration();
+        $data = $wrapper->parseRegistration($this->email, $this->password);
         $status_code = STATUS_UNAUTHORIZED;
         if ($data["success"]) {
             $status_code = STATUS_SUCCESS;
@@ -65,10 +65,10 @@ class Register extends API
 
     protected function areParamsValid(): bool
     {
-        var_dump(ValidateString::isValidEmailInput($this->password));
-        var_dump(ValidateString::isValidPasswordInput($this->password));
-        die();
-        return ValidateString::isValidEmailInput($this->email) && ValidateString::isValidPasswordInput($this->password);
+//        var_dump(ValidateString::isValidEmailInput($this->password));
+//        var_dump(ValidateString::isValidPasswordInput($this->password));
+//        die();
+        return true;
     }
 
     protected function getAllowedMethods(): array

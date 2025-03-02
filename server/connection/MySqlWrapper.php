@@ -37,7 +37,7 @@ class MySqlWrapper
     }
 
 
-    public function parseRegistration(): array
+    public function parseRegistration($email, $password): array
     {
         $data = [
             "success" => false,
@@ -45,7 +45,7 @@ class MySqlWrapper
         ];
 
         try {
-            $this->connection->queryDB("INSERT INTO users (email, password) VALUES ('$this->email', '$this->password');");
+            $this->connection->queryDB("INSERT INTO users (email, password) VALUES ('$email', '$password');");
             $data["success"] = true;
             $data["message"] = DEFAULT_SUCCESS_MESSAGE;
         } catch (MysqlDuplicateEntryException) {

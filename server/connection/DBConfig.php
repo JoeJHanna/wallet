@@ -14,12 +14,11 @@ use util\DotEnvLoader;
 use const util\MYSQL_ERROR_DUPLICATE_ENTRY;
 
 /**
- * Referene: https://stackoverflow.com/a/3146986
+ * Reference: https://stackoverflow.com/a/3146986
  */
 class DBConfig
 {
     private Mysqli $dbConnection;
-
     public function __construct(bool $isMigration = false)
     {
         $env = new DotEnvLoader();
