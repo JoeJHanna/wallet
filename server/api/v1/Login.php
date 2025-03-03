@@ -12,6 +12,7 @@ use api\API;
 use connection\MySqlWrapper;
 use network\Response;
 use util\ValidateString;
+use const util\DEFAULT_ERROR_MESSAGE;
 use const util\DEFAULT_SUCCESS_MESSAGE;
 use const util\STATUS_SUCCESS;
 use const util\STATUS_UNAUTHORIZED;
@@ -43,21 +44,23 @@ class Login extends API
         return $this->verifyLogin();
     }
 
-    private function verifyLogin(): Response
+    private function verifyLogin()
     {
         $wrapper = new MySqlWrapper();
-        if ($wrapper->parseLoginRequest($this->email, $this->password)) {
+        $result = $wrapper->parseLoginRequest($this->email, $this->password);
+        if (!$result) {
+            return new Response(
+                STATUS_UNAUTHORIZED,
+                DEFAULT_ERROR_MESSAGE,
+                null
+            );
+        }
+
             return new Response(
                 STATUS_SUCCESS,
                 DEFAULT_SUCCESS_MESSAGE,
-                ["token"]
+                [$result]
             );
-        }
-        return new Response(
-            STATUS_UNAUTHORIZED,
-            USER_NOT_FOUND_MESSAGE,
-            null
-        );
     }
 
     protected function areParamsValid(): bool
