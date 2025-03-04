@@ -73,12 +73,14 @@ a {
 
 .login-container > .card {
     display: flex;
+    align-items: center;
+    padding: 0 2rem;
     justify-content: center;
 }
 
 .login-form {
     margin: 3rem 2rem;
-    width: 500px;
+    width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -140,7 +142,7 @@ a {
     height: 100vh;
     width: 8rem;
     box-shadow: 3px 0 10px rgb(0 0 0 / 0.7);
-    position: fixed;
+    position: sticky;
     background-color: #110962;
 }
 
@@ -149,37 +151,43 @@ a {
     flex-direction: column;
     align-items: center;
     flex-grow: 1;
-    margin: 3rem 20rem;
+    width: 100%;
+    margin: 3rem 0;
 }
 
 
+.admin-analytics > .card {
+    border: 0.5rem solid #110962;
+    margin: 2%;
+    width: 100%;
 
-.admin-analytics > .card{
-   border: 0.5rem solid #110962;
-    margin: 3rem 0;
 
 }
 
 .user-analytics {
-    width: 1500px;
+    width: 100%;
+    max-width: 1000px;
     aspect-ratio: 3/1;
     margin: 1rem;
 }
 
 .transaction-analytics {
-    width: 1500px;
+    width: 100%;
+    max-width: 1000px;
     aspect-ratio: 3/1;
     margin: 1rem;
 }
 
 @media (max-width: 1000px) {
-    .login-form{
-        width: 100vw;
-        height: 100vh;
-        margin: 2rem;
+    .login-form {
+        width: 100%;
+        height: 100%;
+        margin: 3rem;
+        padding: 0 1rem;
+    }
+
+    .login-container > card {
+        width: 100%;
+        height: 100%;
     }
 }
-
-
-
-
