@@ -1,7 +1,7 @@
 <?php
 
 
-/*
+/**
  * References: https://auth0.com/docs/secure/tokens/json-web-tokens/json-web-token-structure
  * https://stackoverflow.com/a/73271804
  * https://www.loginradius.com/blog/engineering/guest-post/securing-php-api-with-jwt/
@@ -61,7 +61,7 @@ class JWT
 
     public function getJWT()
     {
-        return $this->getHeader() . '.' . $this->getPayload() . '.' . $this->getSignature();
+       return $this->getHeader() . '.' . $this->getPayload() . '.' . $this->getSignature();
     }
 
     private function base64UrlEncode($string): string

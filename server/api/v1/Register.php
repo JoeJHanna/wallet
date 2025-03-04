@@ -44,7 +44,6 @@ class Register extends API
         if ($response) {
             return $response;
         }
-        var_dump($this->password);
         $this->password = Cryptography::hashPassword($this->password);
         return $this->register();
     }
