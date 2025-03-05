@@ -3,6 +3,8 @@ An exercise in designing and implementing, being mindful of security, a fully fu
 
 The backend is required to be served on an EC2 instance with certbot enabled and a scheduled database backup. The frontend on [GitHub Pages](https://pages.github.com/)
 
+The app is hosted on IP [13.38.64.121](https://13.38.64.121/) with domain [ec2-13-38-64-121.eu-west-3.compute.amazonaws.com](http://ec2-13-38-64-121.eu-west-3.compute.amazonaws.com/)
+
 #### Disclaimer
 The real challenge of this project is the time constraints; where we are given a deadline in `8 days, 23 hours, 29 minutes` out of which `45 hours` are of general lectures, leaving us with only `170 of hours of a deadline`. This is my progress given the time constraints.
 
