@@ -45,7 +45,7 @@
 					},
 					"response": [
 						{
-							"name": "http://13.38.64.121//api/v1/Register.php",
+							"name": "Register API",
 							"originalRequest": {
 								"method": "POST",
 								"header": [],
@@ -59,8 +59,8 @@
 									}
 								},
 								"url": {
-									"raw": "http://{{base_url}}//api/v1/Register.php",
-									"protocol": "http",
+									"raw": "https://{{base_url}}//api/v1/Register.php",
+									"protocol": "https",
 									"host": [
 										"{{base_url}}"
 									],
@@ -78,7 +78,7 @@
 							"header": [
 								{
 									"key": "Date",
-									"value": "Wed, 05 Mar 2025 02:38:04 GMT"
+									"value": "Wed, 05 Mar 2025 18:55:28 GMT"
 								},
 								{
 									"key": "Server",
@@ -90,7 +90,7 @@
 								},
 								{
 									"key": "Keep-Alive",
-									"value": "timeout=5, max=100"
+									"value": "timeout=5, max=99"
 								},
 								{
 									"key": "Connection",
@@ -142,7 +142,7 @@
 					},
 					"response": [
 						{
-							"name": "http://13.38.64.121//api/v1/Login.php",
+							"name": "Login API",
 							"originalRequest": {
 								"method": "POST",
 								"header": [],
@@ -156,8 +156,8 @@
 									}
 								},
 								"url": {
-									"raw": "http://{{base_url}}//api/v1/Login.php",
-									"protocol": "http",
+									"raw": "https://{{base_url}}//api/v1/Login.php",
+									"protocol": "https",
 									"host": [
 										"{{base_url}}"
 									],
@@ -175,7 +175,7 @@
 							"header": [
 								{
 									"key": "Date",
-									"value": "Wed, 05 Mar 2025 02:38:11 GMT"
+									"value": "Wed, 05 Mar 2025 18:56:03 GMT"
 								},
 								{
 									"key": "Server",
@@ -199,7 +199,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"message\": \"Success!\",\n    \"data\": [\n        \"eyJhbGciOiJzaGE1MTIiLCJ0eXAiOiJKV1QifQ.eyJpZCI6IjMiLCJyb2xlIjoiMSJ9.ImM0NDg3MWU3M2VmYjllNTY2NDM5ODI0YjMwZjkwZDI2YzBmOGVlOTA2MmM5MTU3NjM5MjFmMDFmOWE4ZWFmMzA0Y2IzZTkzMzE2NDAwNmU3NGI0NDQ5NGU2ZjI5Zjk0MWEwY2NiM2QyYzkyOTkxMGQyNjIxNGI5NzQ3NzE0Mzk3Ig\"\n    ]\n}"
+							"body": "{\n    \"message\": \"Success!\",\n    \"data\": [\n        \"eyJhbGciOiJzaGE1MTIiLCJ0eXAiOiJKV1QifQ.eyJpZCI6IjEiLCJyb2xlIjoiMSJ9.ImJjYWQ2YjRkYjMxYTYwZmE1ZDY0YzVhNTcwYzgzYWU2MzliOWQzOWY2ZGY5YTRiNjdmZjQ2NjY5NTM2OWEzZTQ1ZmVlZGRhYmE0MzFiNWFiNWVhODg2N2NhMjE2NDU2Y2NiYzY1Y2UwMThhMjUyZmVjOTlmYTVhY2EzYjNiYTNjIg\"\n    ]\n}"
 						}
 					]
 				}
