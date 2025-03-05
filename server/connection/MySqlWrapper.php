@@ -5,14 +5,16 @@ namespace connection;
 require_once(__DIR__ . '/../exception/MysqlDuplicateEntryException.php');
 require_once(__DIR__ . '/../util/Constants.php');
 require_once(__DIR__ . '/../util/Cryptography.php');
+require_once (__DIR__ . '/../util/JWT.php');
 
 use exception\MysqlDuplicateEntryException;
 use util\Cryptography;
+use util\JWT;
 use const util\DEFAULT_ERROR_MESSAGE;
 use const util\DEFAULT_SUCCESS_MESSAGE;
 use const util\USER_ALREADY_EXISTS;
 
-require_once ("DBConfig.php");
+require_once("DBConfig.php");
 
 class MySqlWrapper
 {
@@ -24,16 +26,19 @@ class MySqlWrapper
 
     }
 
-    public function parseLoginRequest($email, $password): bool
+    public function parseLoginRequest($email, $password): ?string
     {
-        $query = "SELECT password FROM users WHERE email='$email'";
+        $query = "SELECT user_id, password FROM users WHERE email='$email'";
 
         $result = $this->parseData($query);
         if ($result == null) {
-            return false;
+            return null;
 
         }
-        return Cryptography::verifyHashedPassword($password, $result[0]["password"]);
+        if (Cryptography::verifyHashedPassword($password, $result[0]["password"])) {
+            return (new  JWT($result[0]["user_id"], '1'))->getJWT();
+        }
+        return  null;
     }
 
 

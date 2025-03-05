@@ -5,7 +5,7 @@ class DotEnvLoader
 {
     private array|false $env;
 
-    /*
+    /**
      * Reference: https://stackoverflow.com/a/75621780
      */
     public function __construct()

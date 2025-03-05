@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * https://www.uptimia.com/questions/how-to-check-if-a-string-is-valid-json-in-php
  */
 
@@ -36,7 +36,6 @@ class JWTValidator
         $jwtHead = $this->decodeJWT($encoded_JWThead);
         $jwtPayload = $this->decodeJWT($encoded_JWTPayload);
         $jwtSignature = $this->decodeJWT($encoded_JWTSignature);
-
         $headParams = $this->verifyHeaderParameters($jwtHead);
         if (!$headParams) {
             return null;
@@ -47,12 +46,11 @@ class JWTValidator
         }
 
 
-        if ($this->validateSignature($encoded_JWThead, $encoded_JWTPayload, $jwtSignature, $headParams['algo'])) {
+        if (!$this->validateSignature($encoded_JWThead, $encoded_JWTPayload, $jwtSignature, $headParams['alg'])) {
             return null;
         }
 
-        return true;
-
+        return $payloadParams;
     }
 
     public function decodeJWT($encoded_JWT)
@@ -69,9 +67,15 @@ class JWTValidator
 
     private function verifyHeaderParameters($JWThead)
     {
-        if (!(isset($JWThead) == "alg" && isset($JWThead) == "type")) {
-            return false;
+        if (!(isset($JWThead) == "alg" && isset($JWThead) == "typ")) {
+            return null;
         }
+
+
+        if ($JWThead["typ"] !== 'JWT') {
+            return null;
+        }
+
         return $JWThead;
     }
 
@@ -87,17 +91,16 @@ class JWTValidator
     private function validateSignature($encoded_JWTHead, $encoded_JWTPayload, $JWTSignature, $algo)
     {
         $signature = hash_hmac($algo, $encoded_JWTHead . "." . $encoded_JWTPayload, $this->signing_key);
-
         return ($signature == $JWTSignature);
     }
 
     function validateAndDecodeJson($string)
     {
-        json_decode($string);
+        json_decode($string , true);
         if (!json_last_error() === JSON_ERROR_NONE) {
             return null;
         }
-        return json_decode($string);
+        return json_decode($string, true);
     }
 }
 
