@@ -12,4 +12,4 @@ const DEFAULT_ERROR_MESSAGE = "An error has occurred!";
 const USER_NOT_FOUND_MESSAGE = "User or Password incorrect!";
 const USER_ALREADY_EXISTS = "User already exists!";
 const MYSQL_ERROR_DUPLICATE_ENTRY = 1062;
-const REGEX_PASSWORD = '/[(){}[\]\|`¬¦! \/\\"£\$%\^&\*"<>:;#~\-\+=,@\.\']/u';
+const REGEX_PASSWORD = '/"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"/u';
