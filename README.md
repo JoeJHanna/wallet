@@ -87,3 +87,6 @@ See also the [postman collection](.documentation/postman_collection.json) exampl
  - An authentication layer with Login and Registration
  - JWT [Generation](server/util/JWT.php) and [Validation](server/util/JWTValidator.php)
  - Token storage in Cookies
+ - Scheduled Database Backups
+ - Secured with a Self-Signed Certificate
+ - PHPStan Static Analysis reports 0 errors of level 0
